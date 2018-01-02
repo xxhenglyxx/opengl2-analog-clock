@@ -25,7 +25,9 @@ NonStd::Clock::Clock (
     circle_radius ( circle_radius ),
     min_stick_width ( min_stick_width ),
     sec_stick_width ( sec_stick_width ),
-    hour_stick_width ( hour_stick_width ) {};
+    hour_stick_width ( hour_stick_width ),
+    show ( false ),
+    date_show ( true ) {};
 
 void NonStd::Clock::clockToggle () {
 
@@ -201,7 +203,9 @@ void NonStd::Clock::__numberLine () {
     struct std::tm * time_struct = std::localtime ( &current_time );
 
     // this text drawing is not generic
-    this -> drawText ( asctime ( time_struct ), -190, r - 380, sizeof ( asctime ( time_struct ) ) * 3 );
+
+    if ( this -> date_show )
+        this -> drawText ( asctime ( time_struct ), -190, r - 380, sizeof ( asctime ( time_struct ) ) * 3 );
 
 };
 
@@ -250,3 +254,15 @@ void NonStd::Clock::setHour ( int_sig hour ) {
     this -> hour = 30 * hour;
 
 };
+
+void NonStd::Clock::dateToggle () {
+
+    this -> date_show = !this -> date_show;
+
+};
+
+bool NonStd::Clock::isDateShow () const {
+
+    return this -> date_show;
+
+}

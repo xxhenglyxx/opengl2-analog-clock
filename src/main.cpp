@@ -8,6 +8,12 @@ NonStd::Clock analogClock ( 600, 480, 560, 520, 60 );
 void render ();
 void timer ( int val );
 void windowOnChange ( int width, int height );
+void initMenu ();
+
+void dateShown ( int val );
+void hourStickColor ( int val );
+void minStickColor ( int val );
+void secStickColor ( int val );
 
 int main ( int args_len, char ** args_context ) {
 
@@ -33,7 +39,9 @@ int main ( int args_len, char ** args_context ) {
     analogClock.setHour ( time_struct -> tm_hour );
 
     glutDisplayFunc ( render );
-    glutReshapeFunc ( windowOnChange );
+    // glutReshapeFunc ( windowOnChange );
+
+    initMenu ();
 
     glutTimerFunc ( 1000, timer, NULL );
 
@@ -66,11 +74,79 @@ void timer ( int val ) {
 
 };
 
-void windowOnChange ( int width, int height ) {
+void dateShown ( int val ) {
 
-    glViewport ( 0, 0, ( GLsizei ) width, ( GLsizei ) height );
-    glMatrixMode ( GL_PROJECTION );
-    glLoadIdentity ();
-    glMatrixMode ( GL_MODELVIEW );
+    switch ( val ) {
+
+        case 0: {
+
+            if ( !analogClock.isDateShow () )
+                analogClock.dateToggle ();
+            
+            break;
+
+        }
+
+        case 1: {
+
+            if ( analogClock.isDateShow () )
+                analogClock.dateToggle ();
+
+            break;
+
+        }
+
+    }
+
+    glutPostRedisplay ();
+
+};
+
+void hourStickColor ( int val ) {
+
+};
+
+void minStickColor ( int val ) {
+
+};
+
+void secStickColor ( int val ) {
+
+};
+
+void mainMenu ( int val ) {
+
+}
+
+void initMenu () {
+
+    int date_show_menu = glutCreateMenu ( dateShown );
+
+    glutAddMenuEntry ( "On", 0 );
+    glutAddMenuEntry ( "Off", 1 );
+
+    int h_stick_color_menu = glutCreateMenu ( hourStickColor );
+
+    glutAddMenuEntry ( "Red", 0 );
+    glutAddMenuEntry ( "Green", 1 );
+
+    int m_stick_color_menu = glutCreateMenu ( minStickColor );
+
+    glutAddMenuEntry ( "Black", 0 );
+    glutAddMenuEntry ( "Yellow", 1 );
+
+    int s_stick_color_menu = glutCreateMenu ( secStickColor );
+
+    glutAddMenuEntry ( "Purple", 0 );
+    glutAddMenuEntry ( "Brown", 1 );
+
+    int main_menu = glutCreateMenu ( mainMenu );
+
+    glutAddSubMenu ( "Date", date_show_menu );
+    glutAddSubMenu ( "Hour Stick Color", h_stick_color_menu );
+    glutAddSubMenu ( "Minute Stick Color", m_stick_color_menu );
+    glutAddSubMenu ( "Second Stick Color", s_stick_color_menu );
+
+    glutAttachMenu ( GLUT_RIGHT_BUTTON );
 
 };

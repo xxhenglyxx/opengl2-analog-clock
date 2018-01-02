@@ -21,7 +21,7 @@ namespace NonStd {
                 minutes, seconds, hour, radius,
                 min_stick_length, sec_stick_length, hour_stick_length, circle_radius,
                 min_stick_width, sec_stick_width, hour_stick_width;
-            bool show;
+            bool show, date_show;
 
             void _drawClock ();
             void __clockFrame ();
@@ -57,7 +57,9 @@ namespace NonStd {
 
             void clockToggle ();
             void setRadius ( int_sig radius );
+            void dateToggle ();
             bool isClockShow () const;
+            bool isDateShow () const;
 
             void setMinute ( int_sig minutes );
             void setSecond ( int_sig seconds );
