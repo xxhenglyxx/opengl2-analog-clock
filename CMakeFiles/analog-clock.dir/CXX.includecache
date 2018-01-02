@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/shadowlegend/zaman/computer-graphic/analog-clock/src/Clock.cpp
+Clock.h
+/Users/shadowlegend/zaman/computer-graphic/analog-clock/src/Clock.h
+
+/Users/shadowlegend/zaman/computer-graphic/analog-clock/src/main.cpp
+Clock.h
+/Users/shadowlegend/zaman/computer-graphic/analog-clock/src/Clock.h
+
+include/Clock.h
+OpenGL/gl.h
+-
+GLUT/glut.h
+-
+time.h
+-
+iostream
+-
+math.h
+-
+
