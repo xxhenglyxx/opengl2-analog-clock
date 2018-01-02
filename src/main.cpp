@@ -7,6 +7,7 @@ NonStd::Clock analogClock ( 600, 480, 560, 520, 60 );
 
 void render ();
 void timer ( int val );
+void windowOnChange ( int width, int height );
 
 int main ( int args_len, char ** args_context ) {
 
@@ -32,6 +33,7 @@ int main ( int args_len, char ** args_context ) {
     analogClock.setHour ( time_struct -> tm_hour );
 
     glutDisplayFunc ( render );
+    glutReshapeFunc ( windowOnChange );
 
     glutTimerFunc ( 1000, timer, NULL );
 
@@ -61,5 +63,14 @@ void timer ( int val ) {
     glutTimerFunc ( 1000, timer, NULL );
 
     glutPostRedisplay ();
+
+};
+
+void windowOnChange ( int width, int height ) {
+
+    glViewport ( 0, 0, ( GLsizei ) width, ( GLsizei ) height );
+    glMatrixMode ( GL_PROJECTION );
+    glLoadIdentity ();
+    glMatrixMode ( GL_MODELVIEW );
 
 };

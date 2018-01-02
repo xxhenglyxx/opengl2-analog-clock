@@ -121,7 +121,7 @@ void NonStd::Clock::__secondStick () {
         glColor3d ( .0, 1.0, .0 );
 
         glVertex2d ( 0, 0 );
-        glVertex2d ( this -> min_stick_length * sin ( s * to_rad ), this -> sec_stick_length * cos ( s * to_rad ) );
+        glVertex2d ( this -> sec_stick_length * sin ( s * to_rad ), this -> sec_stick_length * cos ( s * to_rad ) );
 
     glEnd ();
 
@@ -190,12 +190,18 @@ void NonStd::Clock::__numberLine () {
 
             glColor3d ( .0, .0, .0 );
 
-            glVertex2d ( ( r - 30 ) * cos ( angle * to_rad ), ( r - 30 ) * sin ( angle * to_rad ) );
-            glVertex2d ( ( length + stick_length ) * cos ( angle * to_rad ), ( length + stick_length ) * sin ( angle * to_rad ) );
+            glVertex2d ( ( r - 30 ) * sin ( angle * to_rad ), ( r - 30 ) * cos ( angle * to_rad ) );
+            glVertex2d ( ( length + stick_length ) * sin ( angle * to_rad ), ( length + stick_length ) * cos ( angle * to_rad ) );
 
         glEnd ();
 
     }
+
+    std::time_t current_time = time ( NULL );
+    struct std::tm * time_struct = std::localtime ( &current_time );
+
+    // this text drawing is not generic
+    this -> drawText ( asctime ( time_struct ), -190, r - 380, sizeof ( asctime ( time_struct ) ) * 3 );
 
 };
 
